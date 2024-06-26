@@ -2,182 +2,42 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./src/assets/appLogo/ChatGPT_real_not_fake.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ChatBots</title>
+	<meta charset="UTF-8" />
+	<link rel="icon" type="image/svg+xml" href="./src/assets/appLogo/ChatGPT_real_not_fake.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>ChatBots</title>
 </head>
 
 <body>
-  <div class="main">
-    <div class="topbar">
-      <img src="./src/assets/appLogo/ChatGPT_real_not_fake.png" height="50" />
+	<div class="main">
+		<div class="topbar">
+			<img src="./src/assets/appLogo/ChatGPT_real_not_fake.png" height="50" />
 
-      <span>ChatBots</span>
-    </div>
+			<span>ChatBots</span>
+		</div>
 
-    <div class="content">
-      <div class="bot-list">
-        <h3>Bot list</h3>
-      </div>
+		<div class="content">
+			<div class="bot-list">
+				<h3>Bot list</h3>
+			</div>
 
-      <div class="chat-window">
-        <div class="chat-messages">
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
+			<div class="chat-window">
+				<div id="chat-messages" class="chat-messages"></div>
 
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
+				<div class="chat-inputs">
+					<textarea id="input" class="input" placeholder="Send a message..."></textarea>
 
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
+					<button class="button-send">
+						<div style="height: 25px;">
+							<img src="./src/assets/icons/send.svg" style="height: 100%;" />
+						</div>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-
-          <div class="message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas quae consectetur natus dicta
-            molestias
-            velit, temporibus nesciunt soluta rerum ducimus expedita corrupti optio similique cupiditate aperiam laborum
-            enim. Itaque.
-          </div>
-        </div>
-
-        <div class="chat-inputs">
-          <textarea id="input" class="input" placeholder="Send a message..."></textarea>
-
-          <button class="button-send">
-            <div style="height: 25px;">
-              <img src="./src/assets/icons/send.svg" style="height: 100%;" />
-            </div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script type="module" src="/src/ts/main.ts"></script>
+	<script type="module" src="/src/ts/main.ts"></script>
 </body>
 
 </html>
