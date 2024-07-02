@@ -14,6 +14,14 @@
 			<img src="./src/assets/appLogo/ChatGPT_real_not_fake.png" height="50" />
 
 			<span>ChatBots</span>
+
+			<button id="setMockMessagesButton">
+				Set mock messages
+			</button>
+
+			<button id="deleteMockMessagesButton" style="background-color: red; color: white;">
+				Delete mock messages
+			</button>
 		</div>
 
 		<div class="content">
@@ -22,12 +30,18 @@
 			</div>
 
 			<div class="chat-window">
-				<div id="chat-messages" class="chat-messages"></div>
+				<div id="chat" class="chat"></div>
 
 				<div class="chat-inputs">
-					<textarea id="input" class="input" placeholder="Send a message..."></textarea>
+					<button id="scrollButton" class="button-scroll">
+						<div style="height: 25px;">
+							<img src="./src/assets/icons/down.svg" style="height: 100%;" />
+						</div>
+					</button>
 
-					<button class="button-send">
+					<textarea id="messageInput" class="message-input" placeholder="Send a message..."></textarea>
+
+					<button id="sendButton" class="button-send">
 						<div style="height: 25px;">
 							<img src="./src/assets/icons/send.svg" style="height: 100%;" />
 						</div>

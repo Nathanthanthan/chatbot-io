@@ -1,63 +1,103 @@
 import '../css/main.css';
 
-import { renderMessage } from './components/message/message';
+import { setupInputs } from './inputs/inputs';
+import { renderLocalMessages } from './messages/messages';
 
-function setupTextArea() {
-	const textArea = document.querySelector<HTMLTextAreaElement>('#input');
+function setupMockMessagesButtons() {
+	const setMockMessagesButton = document.querySelector<HTMLButtonElement>('#setMockMessagesButton');
+	const deleteMockMessagesButton = document.querySelector<HTMLButtonElement>('#deleteMockMessagesButton');
 
-	if (!textArea) return;
+	if (!setMockMessagesButton || !deleteMockMessagesButton) return;
 
-	textArea.addEventListener('input', () => autoSizeTextArea(textArea));
+	setMockMessagesButton.addEventListener('click', () => {
+		localStorage.setItem('mockMessages', JSON.stringify([
+			{
+				content: 'Test',
+				sender: 1,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Test 2',
+				sender: 0,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio eaque voluptatem repellendus. Saepe eos ipsam natus eveniet? Iste nostrum explicabo modi ipsum blanditiis voluptas iure ab. Quam, voluptatem veritatis!',
+				sender: 1,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Test 3',
+				sender: 1,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio eaque voluptatem repellendus. Saepe eos ipsam natus eveniet? Iste nostrum explicabo modi ipsum blanditiis voluptas iure ab. Quam, voluptatem veritatis!',
+				sender: 0,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Test 4',
+				sender: 0,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio',
+				sender: 0,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Test',
+				sender: 1,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Test 2',
+				sender: 0,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio eaque voluptatem repellendus. Saepe eos ipsam natus eveniet? Iste nostrum explicabo modi ipsum blanditiis voluptas iure ab. Quam, voluptatem veritatis!',
+				sender: 1,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Test 3',
+				sender: 1,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio eaque voluptatem repellendus. Saepe eos ipsam natus eveniet? Iste nostrum explicabo modi ipsum blanditiis voluptas iure ab. Quam, voluptatem veritatis!',
+				sender: 0,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Test 4',
+				sender: 0,
+				timeStamp: new Date(),
+			},
+			{
+				content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio',
+				sender: 0,
+				timeStamp: new Date(),
+			},
+		]));
+
+		location.reload();
+	});
+
+	deleteMockMessagesButton.addEventListener('click', () => {
+		localStorage.removeItem('mockMessages');
+		location.reload();
+	});
 }
 
-function autoSizeTextArea(textArea: HTMLTextAreaElement) {
-	if (!textArea) return;
+setupMockMessagesButtons();
 
-	textArea.style.height = '45px';
-	textArea.style.height = `${textArea.scrollHeight + 2}px`;
-}
+setupInputs();
+renderLocalMessages();
 
-setupTextArea();
-
-renderMessage({
-	content: 'Test',
-	index: 0,
-	sender: 1,
-	timeStamp: new Date(),
-});
-renderMessage({
-	content: 'Test 2',
-	index: 1,
-	sender: 0,
-	timeStamp: new Date(),
-}, 1);
-renderMessage({
-	content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio eaque voluptatem repellendus. Saepe eos ipsam natus eveniet? Iste nostrum explicabo modi ipsum blanditiis voluptas iure ab. Quam, voluptatem veritatis!',
-	index: 2,
-	sender: 1,
-	timeStamp: new Date(),
-}, 0);
-renderMessage({
-	content: 'Test 3',
-	index: 3,
-	sender: 1,
-	timeStamp: new Date(),
-}, 1);
-renderMessage({
-	content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio eaque voluptatem repellendus. Saepe eos ipsam natus eveniet? Iste nostrum explicabo modi ipsum blanditiis voluptas iure ab. Quam, voluptatem veritatis!',
-	index: 4,
-	sender: 0,
-	timeStamp: new Date(),
-}, 1);
-renderMessage({
-	content: 'Test 4',
-	index: 5,
-	sender: 0,
-	timeStamp: new Date(),
-}, 0);
-renderMessage({
-	content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio',
-	index: 6,
-	sender: 0,
-	timeStamp: new Date(),
-}, 0);
+// TODO: do we really have to use localStorage as a pseudo DB or did I misunderstand something?
+// TODO: display name of the bot/"You" in addition to the profile pic
+// TODO: implement lazy load to only display the last ~20 messages in the conv?
+// TODO: comment everything
