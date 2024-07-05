@@ -1,0 +1,37 @@
+.deals-message {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.deals-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	margin-bottom: 0.2rem;
+}
+
+.deal {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+
+	padding: 10px;
+
+	border-radius: 0.5rem;
+	border: 1px solid var(--primary);
+	
+	background-color: var(--bg-dark);
+
+	.deal-title {
+		width: 100%;
+		padding-inline: 1rem;
+
+		text-align: center;
+
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}

@@ -1,0 +1,15 @@
+body {
+	--primary: #00FFFF;
+	--secondary: #3b82f6;
+
+	--bg: #141414;
+	--bg-light: #1E1E1E;
+	--bg-dark: #0F0F0F;
+
+	--contrast-light: #4B4B4B;
+	--contrast-dark: #323232;
+
+	--text: #F0F0F0;
+	--text-muted-light: #C8C8C8;
+	--text-muted-dark: #969696;
+}

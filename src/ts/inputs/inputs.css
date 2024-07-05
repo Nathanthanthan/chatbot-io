@@ -15,8 +15,8 @@
 .button-scroll {
 	padding: 10px;
 
-	background: none;
-	color: var(--contrast-dark);
+	background: var(--contrast-dark);
+	border: 1px solid var(--contrast-light);
 }
 
 .message-input {

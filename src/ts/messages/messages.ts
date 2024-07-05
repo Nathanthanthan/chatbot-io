@@ -1,16 +1,20 @@
 import './messages.css';
 
-export type TMessage = {
+import { TChatterInfo } from '../chatters/chatters';
+import { USER_ID } from '../chatters/user/user';
+
+export type TMessage = Readonly<{
+	chatter: TChatterInfo;
 	content: string;
-	sender: number;
 	timeStamp: Date;
-};
+	isError?: boolean;
+}>;
 
 const chat = document.querySelector<HTMLDivElement>('#chat');
 const messages: TMessage[] = getLocalMessages();
 
 export function getLocalMessages(): TMessage[] {
-	const localMessages = localStorage.getItem('mockMessages');
+	const localMessages = localStorage.getItem('conv');
 
 	if (!localMessages) return [];
 
@@ -19,7 +23,7 @@ export function getLocalMessages(): TMessage[] {
 
 export function saveMessage(message: TMessage) {
 	messages.push(message);
-	localStorage.setItem('mockMessages', JSON.stringify(messages));
+	localStorage.setItem('conv', JSON.stringify(messages));
 }
 
 export function renderToChat(element: string) {
@@ -31,8 +35,8 @@ export function renderToChat(element: string) {
 export function renderMessage(message: TMessage, index: number) {
 	if (!chat) return;
 
-	const userMessage: boolean = message.sender === 0;
-	const firstOfMessageBlock: boolean = messages[index - 1]?.sender !== message.sender;
+	const userMessage: boolean = message.chatter.id === USER_ID;
+	const firstOfMessageBlock: boolean = messages[index - 1]?.chatter.id !== message.chatter.id;
 
 	renderToChat(`
 		<div
@@ -40,13 +44,19 @@ export function renderMessage(message: TMessage, index: number) {
 			style="grid-row: ${index + 1}; grid-column: ${userMessage ? 2 : 1};"
 		>
 			${firstOfMessageBlock ? `
-				<div class="profile-pic">
-					<img src="../../../../src/assets/appLogo/ChatGPT_real_not_fake.png" />
+				<div class="profile-pic message-profile-pic${userMessage ? ' message-profile-pic-user' : ''}" style="${message.chatter.profilePicture.backgroundColor && `background-color: ${message.chatter.profilePicture.backgroundColor}`}">
+					<img src="${message.chatter.profilePicture.path}" />
 				</div>
 			` : ''}
 
-			<div class="message${userMessage ? ' message-user' : ''}">
-				<div>
+			${firstOfMessageBlock ? `
+				<b class="username${userMessage ? ' username-user' : ''}">
+					${message.chatter.username}
+				</b>
+			` : ''}
+
+			<div class="message${userMessage ? ' message-user' : message.isError ? ' message-error' : ''}">
+				<div class="message-content">
 					${message.content}
 				</div>
 
@@ -60,7 +70,7 @@ export function renderMessage(message: TMessage, index: number) {
 
 export function scrollChatToBottom(behavior?: ScrollOptions["behavior"]) {
 	if (!chat) return;
-	
+
 	chat.scrollTo({
 		top: chat.scrollHeight,
 		behavior: behavior ?? 'smooth',
@@ -75,7 +85,7 @@ export function addMessageToChat(message: TMessage) {
 	}
 
 	saveMessage(message);
-	renderMessage(message, messages.length);
+	renderMessage(message, messages.length - 1);
 	scrollChatToBottom();
 }
 
@@ -88,7 +98,7 @@ export function renderLocalMessages() {
 				</h1>
 
 				<h2>
-					Type "!help" to get a list of commands
+					Type "help" to get a list of commands
 				</h2>
 			</div>
 		`);

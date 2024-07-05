@@ -1,0 +1,30 @@
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
+.help-message {
+	gap: 1.5rem;
+}
+
+.help-message-section {
+	gap: 0;
+}
+
+.command-definition-message {
+	gap: 1rem;
+}
+
+.command-definition {
+	gap: 0.5rem;
+}
+
+.command-example {
+	width: fit-content;
+	padding-inline: 0.5rem;
+	padding-block: 0.1rem;
+	
+	border-radius: 0.5rem;
+	
+	background-color: var(--secondary);
+}

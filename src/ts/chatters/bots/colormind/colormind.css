@@ -1,0 +1,17 @@
+.palette-message {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+}
+
+.palette-container {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.palette-color {
+	width: 5rem;
+	height: 5rem;
+
+	border-radius: 0.5rem;
+}
