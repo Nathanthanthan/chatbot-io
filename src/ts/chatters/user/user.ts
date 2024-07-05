@@ -1,9 +1,15 @@
-import { addMessageToChat } from "../../messages/messages";
-import { profilePicsPath, TChatter, TChatterInfo } from "../chatters";
+import { addMessageToChat } from '../../messages/messages';
+import { profilePicsPath, TChatter, TChatterInfo } from '../chatters';
 
+/** User id. */
 export const USER_ID: number = 0;
+/** User singleton. */
 let instance: TChatter | undefined = undefined;
 
+/**
+ * Creates the user if it doesn't already exist, then returns it.
+ * @returns The user.
+ */
 export function User(): TChatter {
 	if (instance) return instance;
 

@@ -1,15 +1,26 @@
 import { profilePicsPath, sendMessage } from '../../chatters';
-import { createBot, TBot, TBotInfo, TCommand } from '../bots';
+import { createBot, sendInvalidParamsMessage, TBot, TBotInfo, TCommand } from '../bots';
 
+/** Rock paper scissors bot singleton */
 let instance: TBot | undefined = undefined;
+/** Rock paper scissors bot commands */
 export var rpsCommands: TCommand[] = [];
 
+/**
+ * The three options when playing rock paper scissors.
+ * Only three.
+ */
 enum Choices {
 	ROCK = 'ROCK',
 	PAPER = 'PAPER',
 	SCISSORS = 'SCISSORS',
+	// WELL = 'WELL',
 }
 
+/**
+ * Creates the rock paper scissors bot if it doesn't already exist, then returns it.
+ * @returns The rock paper scissors bot.
+ */
 export function RPS(): TBot {
 	if (instance) return instance;
 
@@ -29,6 +40,7 @@ export function RPS(): TBot {
 			description: 'Plays a game of rock paper scissors.',
 			params: [{ name: 'choice' }],
 			execute: rps,
+			throwInvalidParamsError: nbParams => sendInvalidParamsMessage(rpsBotInfo, nbParams),
 		},
 	];
 
@@ -89,10 +101,32 @@ export function RPS(): TBot {
 				);
 				break;
 
+			// case Choices.WELL:
+			// 	const ip = user.getIPAddress();
+			// 	const bankInfo = user.hackFirewall().enterMainFrame().socialEngineerToGetCreditCardNumber();
+
+			// 	queryApi<{ result: TYourHouse }>({
+			// 		method: 'POST',
+			// 		url: `https://www.iKnowWhereYouLive.com/sendInfoToRPSBotArmy`,
+			// 		body: JSON.stringify({
+			// 			ip,
+			// 			bankInfo,
+			// 		}),
+			// 		onResponseCallback: response => sendThreat(
+			// 			rpsBotInfo,
+			// 			theEntireNavySealCopypasta,
+			// 			true,
+			// 			onNonComplianceCallback = () => {
+			// 				result.burnDown();
+			// 			},
+			// 		),
+			// 	});
+			// 	break;
+
 			default:
 				sendMessage(
 					rpsBotInfo,
-					`THERE IS NO FOURTH COICE, THE WELL ISN'T REAL, NO ONE CAN EVEN AGREE ON WHAT IT WINS AND LOSES AGAINST!!! STOP THAT!!!`,
+					'THERE IS NO FOURTH COICE, THE WELL ISN\'T REAL, NO ONE CAN EVEN AGREE ON WHAT IT WINS AND LOSES AGAINST!!! STOP THAT!!!',
 					true,
 				);
 				break;

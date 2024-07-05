@@ -3,9 +3,15 @@ import './dogPics.css';
 import { sendMessage } from '../../chatters';
 import { createBot, mapToHTMLString, queryApi, TBot, TBotInfo, TCommand } from '../bots';
 
+/** Dog pics bot singleton. */
 let instance: TBot | undefined = undefined;
+/** Dog pics bot commands. */
 export var dogPicsCommands: TCommand[] = [];
 
+/**
+ * Creates the Dog pics bot if it doesn't already exist, then returns it.
+ * @returns The Dog pics bot.
+ */
 export function DogPics(): TBot {
 	if (instance) return instance;
 
@@ -67,6 +73,11 @@ export function DogPics(): TBot {
 		});
 	}
 
+	/**
+	 * Sends the dog picture corresponding to the url passed as parameter to the chat.
+	 * @param message Message content to send along the picture.
+	 * @param url Url corresponding to the dog picture.
+	 */
 	function sendDog(message: string, url: string) {
 		sendMessage(
 			dogPicsBotInfo,

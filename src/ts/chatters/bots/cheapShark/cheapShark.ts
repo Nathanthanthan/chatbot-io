@@ -1,11 +1,14 @@
 import './cheapShark.css';
 
 import { sendMessage } from '../../chatters';
-import { createBot, mapToHTMLString, queryApi, TBot, TBotInfo, TCommand } from '../bots';
+import { createBot, mapToHTMLString, queryApi, sendInvalidParamsMessage, TBot, TBotInfo, TCommand } from '../bots';
 
+/** CheapShark bot singleton. */
 let instance: TBot | undefined = undefined;
+/** CheapShark bot commands. */
 export var cheapSharkCommands: TCommand[] = [];
 
+/** Partial type returned by the API. */
 type TDeal = Readonly<{
 	title: string;
 	metacriticScore: string;
@@ -14,11 +17,16 @@ type TDeal = Readonly<{
 	salePrice: string;
 }>;
 
+/** Partial type returned by the API. */
 type TGame = Readonly<{
 	external: string;
 	cheapest: string;
 }>;
 
+/**
+ * Creates the CheapShark bot if it doesn't already exist, then returns it.
+ * @returns The CheapShark bot.
+ */
 export function CheapShark(): TBot {
 	if (instance) return instance;
 
@@ -38,6 +46,7 @@ export function CheapShark(): TBot {
 			description: 'Shows X amounts of deals from the current list of deals at cheapshark.com.',
 			params: [{ name: 'nbDeals' }],
 			execute: showDeals,
+			throwInvalidParamsError: nbParams => sendInvalidParamsMessage(cheapSharkBotInfo, nbParams),
 		},
 		{
 			body: 'searchgame',
@@ -45,6 +54,7 @@ export function CheapShark(): TBot {
 			description: '',
 			params: [{ name: 'gameName' }],
 			execute: searchGame,
+			throwInvalidParamsError: nbParams => sendInvalidParamsMessage(cheapSharkBotInfo, nbParams),
 		},
 	];
 

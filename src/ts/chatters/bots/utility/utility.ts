@@ -1,16 +1,22 @@
 import './utility.css';
 
+import { renderLocalMessages } from '../../../messages/messages';
 import { profilePicsPath, sendMessage } from '../../chatters';
-import { createBot, mapToHTMLString, TBot, TBotInfo, TCommand, TParam } from '../bots';
+import { createBot, mapToHTMLString, sendInvalidParamsMessage, TBot, TBotInfo, TCommand, TParam } from '../bots';
+import { cheapSharkCommands } from '../cheapShark/cheapShark';
 import { colormindCommands } from '../colormind/colormind';
 import { dogPicsCommands } from '../dogPics/dogPics';
-import { cheapSharkCommands } from '../cheapShark/cheapShark';
 import { rpsCommands } from '../rps/rps';
 
+/** Utility bot ID. */
 export const UTILITY_BOT_ID: number = 1;
+/** Utility bot singleton. */
 let instance: TBot | undefined = undefined;
-export var utilityCommands: TCommand[] = [];
 
+/**
+ * Creates the utility bot if it doesn't already exist, then returns it.
+ * @returns The utility bot.
+ */
 export function Utility(): TBot {
 	if (instance) return instance;
 
@@ -39,6 +45,7 @@ export function Utility(): TBot {
 			description: 'Shows more informations about the command passed as parameter.',
 			params: [{ name: 'command' }],
 			execute: commandInfo,
+			throwInvalidParamsError: nbParams => sendInvalidParamsMessage(utilityBotInfo, nbParams),
 		},
 		{
 			body: 'hello',
@@ -54,10 +61,12 @@ export function Utility(): TBot {
 		},
 	];
 
-	utilityCommands = commands;
+	const utilityCommands = commands;
 	const utilityBot: TBot = createBot(utilityBotInfo, commands);
 	instance = utilityBot;
 
+	// Getting all of the other bots' commands,
+	// while ignoring the default `hello` command
 	const allCommands: TCommand[] = [
 		...colormindCommands.filter(command => command.body !== 'hello'),
 		...dogPicsCommands.filter(command => command.body !== 'hello'),
@@ -104,7 +113,7 @@ export function Utility(): TBot {
 			return;
 		}
 
-		const fullCommand = allCommands.find(c => c.body === command[0]);
+		const fullCommand = allCommands.find(c => c.body.includes(command[0]));
 
 		if (!fullCommand) {
 			sendMessage(
@@ -135,7 +144,7 @@ export function Utility(): TBot {
 
 	function clearConv() {
 		localStorage.removeItem('conv');
-		location.reload();
+		renderLocalMessages();
 	}
 
 	return utilityBot;

@@ -3,10 +3,17 @@ import './colormind.css';
 import { profilePicsPath, sendMessage } from '../../chatters';
 import { createBot, mapToHTMLString, queryApi, sendInvalidParamsMessage, TBot, TBotInfo, TCommand } from '../bots';
 
+/** Colormind bot singleton. */
 let instance: TBot | undefined = undefined;
+/** Colormind bot commands. */
 export var colormindCommands: TCommand[] = [];
+/** Document's body. */
 const body = document.body;
 
+/**
+ * Creates the Colormind bot if it doesn't already exist, then returns it.
+ * @returns The Colormind bot.
+ */
 export function Colormind(): TBot {
 	if (instance) return instance;
 
@@ -43,6 +50,12 @@ export function Colormind(): TBot {
 			throwInvalidParamsError: nbParams => sendInvalidParamsMessage(colormindBotInfo, nbParams),
 		},
 		{
+			body: 'changethemerandom',
+			bot: colormindBotInfo,
+			description: 'Changes the primary color of the application to a random color.',
+			execute: changeThemeRandom,
+		},
+		{
 			body: 'restoretheme',
 			bot: colormindBotInfo,
 			description: 'Restores the default theme of the application.',
@@ -54,13 +67,23 @@ export function Colormind(): TBot {
 	const colormindBot: TBot = createBot(colormindBotInfo, commands);
 	instance = colormindBot;
 
-	function generateRandomPalette() {
+	/**
+	 * Gets a random color palette from the colormind API.
+	 * @param onResponseCallback 
+	 */
+	function getRandomPalette(onResponseCallback: (response: { result: number[][] }) => void) {
 		queryApi<{ result: number[][] }>({
 			method: 'POST',
 			url: colormindBotInfo.apiBaseUrl,
 			body: JSON.stringify({ model: 'default' }),
-			onResponseCallback: response => sendPalette('Here is a randomly generated color palette:', response.result),
+			onResponseCallback,
 		});
+	}
+
+	function generateRandomPalette() {
+		getRandomPalette(
+			response => sendPalette('Here is a randomly generated color palette:', response.result),
+		);
 	}
 
 	function suggestPalette(rgb?: string[]) {
@@ -79,12 +102,17 @@ export function Colormind(): TBot {
 			url: colormindBotInfo.apiBaseUrl,
 			body: JSON.stringify({
 				model: 'default',
-				input: [rgb, "N", "N", "N"],
+				input: [rgb, 'N', 'N', 'N'],
 			}),
 			onResponseCallback: response => sendPalette('Here is a color palette generated based on your input:', response.result),
 		});
 	}
 
+	/**
+	 * Sends the color palette passed as parameter to the chat.
+	 * @param message Message content to send along with the palette.
+	 * @param palette Palette to send in the chat.
+	 */
 	function sendPalette(message: string, palette: number[][]) {
 		sendMessage(
 			colormindBotInfo,
@@ -116,10 +144,16 @@ export function Colormind(): TBot {
 
 		sendMessage(
 			colormindBotInfo,
-			`The app's theme has been changed!`,
+			'The app\'s theme has been changed!',
 		);
 
 		body.style.setProperty('--primary', `rgb(${rgb.join(', ')})`);
+	}
+
+	function changeThemeRandom() {
+		getRandomPalette(
+			response => changeTheme(response.result[0].map(rgbValue => rgbValue.toString())),
+		);
 	}
 
 	function restoreTheme() {
@@ -128,7 +162,7 @@ export function Colormind(): TBot {
 			'You can\'t go wrong with cyan and black... It just looks so slick!',
 		);
 
-		body.style.setProperty('--primary', `rgb(0, 255, 255)`);
+		body.style.setProperty('--primary', 'rgb(0, 255, 255)');
 	}
 
 	return colormindBot;

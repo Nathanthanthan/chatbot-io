@@ -10,30 +10,49 @@
 
 <body>
 	<div class="main">
+		<!-- Top bar -->
 		<div class="topbar">
-			<img src="./src/assets/profilePictures/ChatGPT_real_not_fake.png" height="50" />
+			<!-- Responsive burger menu -->
+			<div class="burger-container">
+				<input type="checkbox" id="toggleBotListCheckbox" class="toggle-bot-list-checkbox" />
 
-			<span>ChatBots</span>
+				<label for="toggleBotListCheckbox" class="burger">
+					<div></div>
+					<div></div>
+					<div></div>
+				</label>
+			</div>
+
+			<!-- Title container -->
+			<div class="title-container">
+				<img src="./src/assets/profilePictures/ChatGPT_real_not_fake.png" height="50" />
+
+				<span>ChatBots</span>
+			</div>
 		</div>
 
 		<div class="content">
+			<!-- Bot list -->
 			<div class="bot-list" id="botList">
 				<h3>Bot list</h3>
 			</div>
 
 			<div class="chat-window">
+				<!-- Chat displaying all the messages -->
 				<div id="chat" class="chat"></div>
 
-
 				<div class="chat-inputs">
+					<!-- Scroll back down button -->
 					<button id="scrollButton" class="button-scroll">
 						<div style="height: 25px;">
 							<img src="./src/assets/icons/down.svg" style="height: 100%;" />
 						</div>
 					</button>
 
+					<!-- Message input -->
 					<textarea id="messageInput" class="message-input" placeholder="Send a message..."></textarea>
 
+					<!-- Send message button -->
 					<button id="sendButton" class="button-send">
 						<div style="height: 25px;">
 							<img src="./src/assets/icons/send.svg" style="height: 100%;" />
