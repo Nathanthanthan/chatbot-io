@@ -126,7 +126,7 @@ export function RPS(): TBot {
 			default:
 				sendMessage(
 					rpsBotInfo,
-					'THERE IS NO FOURTH COICE, THE WELL ISN\'T REAL, NO ONE CAN EVEN AGREE ON WHAT IT WINS AND LOSES AGAINST!!! STOP THAT!!!',
+					'THERE IS NO FOURTH CHOICE, THE WELL ISN\'T REAL, NO ONE CAN EVEN AGREE ON WHAT IT WINS AND LOSES AGAINST!!! STOP THAT!!!',
 					true,
 				);
 				break;
